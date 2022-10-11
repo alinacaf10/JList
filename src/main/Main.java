@@ -1,6 +1,8 @@
 package main;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Main {
 
@@ -25,10 +27,31 @@ public class Main {
         JList<String> list2=new JList<>(l2);
         list2.setBounds(100,200,75,85);
 
+        JButton button=new JButton("Show");
+        button.setBounds(200,150,80,30);
+        button.addActionListener(new ActionListener() {
+            String text="";
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (list.getSelectedIndex()!= -1){
+                    text="Choosen Programming Language: "+list.getSelectedValue();
+                }
+                if (list2.getSelectedIndex()!=-1){
+                    text+=",Choosen Framework ";
+                    for(Object item : list2.getSelectedValuesList()){
+                        text+= item+" ";
+                    }
+
+                }
+                System.out.println(text);
+            }
+        });
+
         frame.setSize(400,400);
         frame.setVisible(true);
         frame.setLayout(null);
         frame.add(list);
         frame.add(list2);
+        frame.add(button);
     }
 }
